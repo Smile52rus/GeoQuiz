@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">GeoQuiz</string>
+    <string name="question_australia">хахахаха</string>
+    <string name="question_oceans">dqdqdqd</string>
+    <string name="question_mideast">fafqqfqf</string>
+    <string name="question_africa">ffsfssf</string>
+    <string name="question_americas">gsgsgsg</string>
+    <string name="question_asia">fwwfwfwq</string>
+    <string name="correct_toast">Верно</string>
+    <string name="incorrect_toast">Неверно</string>
+    <string name="back_button">Назад</string>
+    <string name="next_button">Далее</string>
+    <string name="true_button">Верно</string>
+    <string name="false_button">Не верно</string>
 </resources>
