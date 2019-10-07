@@ -31,9 +31,6 @@ public class QuizActivity extends AppCompatActivity {
     };
 
     private int mCurrentIndex = 0;
-    private int mAmountAnsvered = 0;
-    private int mAmountCorrects = 0;
-
     View.OnClickListener nextAnswerListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -41,7 +38,6 @@ public class QuizActivity extends AppCompatActivity {
             updateQuestion();
         }
     };
-
     View.OnClickListener backAnswerListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -50,6 +46,8 @@ public class QuizActivity extends AppCompatActivity {
             updateQuestion();
         }
     };
+    private int mAmountAnsvered = 0;
+    private int mAmountCorrects = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,7 +170,7 @@ public class QuizActivity extends AppCompatActivity {
         mFalseButton.setEnabled(false);
     }
 
-    private void showResult(){
+    private void showResult() {
         Toast toast = Toast.makeText(QuizActivity.this, "Все отвечено. Вы ответили правильно на " + mAmountCorrects + " вопросов из " + mQuestionBank.length, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.TOP, 1, 1);
         toast.show();
