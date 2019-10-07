@@ -3,6 +3,7 @@ package com.arzaapps.android.geoquiz;
 public class Question {
     private int mTextResId;
     private boolean mAnswerTrue;
+    private boolean isCompleted;
 
     public int getTextResId() {
         return mTextResId;
@@ -20,8 +21,18 @@ public class Question {
         mAnswerTrue = answerTrue;
     }
 
-    Question(int textResId, boolean answerTrue){
+
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
+    public void setCompleted(boolean completed) {
+        isCompleted = completed;
+    }
+
+    Question(int textResId, boolean answerTrue, boolean isCompleted){
         mTextResId = textResId;
         mAnswerTrue = answerTrue;
+        this.isCompleted = isCompleted;
     }
 }

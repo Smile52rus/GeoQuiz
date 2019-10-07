@@ -22,12 +22,12 @@ public class QuizActivity extends AppCompatActivity {
     private TextView mQuestionTextView;
 
     private Question[] mQuestionBank = new Question[]{
-            new Question(R.string.question_australia, true),
-            new Question(R.string.question_oceans, true),
-            new Question(R.string.question_mideast, false),
-            new Question(R.string.question_africa, false),
-            new Question(R.string.question_americas, true),
-            new Question(R.string.question_asia, true)
+            new Question(R.string.question_australia, true, false),
+            new Question(R.string.question_oceans, true, false),
+            new Question(R.string.question_mideast, false, false),
+            new Question(R.string.question_africa, false, false),
+            new Question(R.string.question_americas, true, false),
+            new Question(R.string.question_asia, true, false)
     };
 
     private int mCurrentIndex = 0;
@@ -128,6 +128,13 @@ public class QuizActivity extends AppCompatActivity {
     private void updateQuestion() {
         int question = mQuestionBank[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(question);
+        if (mQuestionBank[mCurrentIndex].isCompleted()) {
+            mTrueButton.setEnabled(false);
+            mFalseButton.setEnabled(false);
+        } else {
+            mTrueButton.setEnabled(true);
+            mFalseButton.setEnabled(true);
+        }
     }
 
     private void checkAnswer(boolean userPressedTrue) {
@@ -136,6 +143,11 @@ public class QuizActivity extends AppCompatActivity {
             showToast(true);
         } else {
             showToast(false);
+        }
+        mQuestionBank[mCurrentIndex].setCompleted(true);
+        if (mQuestionBank[mCurrentIndex].isCompleted()) {
+            mTrueButton.setEnabled(false);
+            mFalseButton.setEnabled(false);
         }
     }
 
