@@ -31,6 +31,8 @@ public class QuizActivity extends AppCompatActivity {
     };
 
     private int mCurrentIndex = 0;
+    private int mAmountAnsvered = 0;
+    private int mAmountCorrects = 0;
 
     View.OnClickListener nextAnswerListener = new View.OnClickListener() {
         @Override
@@ -128,27 +130,24 @@ public class QuizActivity extends AppCompatActivity {
     private void updateQuestion() {
         int question = mQuestionBank[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(question);
-        if (mQuestionBank[mCurrentIndex].isCompleted()) {
-            mTrueButton.setEnabled(false);
-            mFalseButton.setEnabled(false);
-        } else {
-            mTrueButton.setEnabled(true);
-            mFalseButton.setEnabled(true);
-        }
+
+        if (mQuestionBank[mCurrentIndex].isCompleted()) buttonsSetDisable();
+        else
+            buttonsSetEnable();
     }
 
     private void checkAnswer(boolean userPressedTrue) {
-
+        mAmountAnsvered++;
         if (userPressedTrue == mQuestionBank[mCurrentIndex].isAnswerTrue()) {
+            mAmountCorrects++;
             showToast(true);
         } else {
             showToast(false);
         }
         mQuestionBank[mCurrentIndex].setCompleted(true);
-        if (mQuestionBank[mCurrentIndex].isCompleted()) {
-            mTrueButton.setEnabled(false);
-            mFalseButton.setEnabled(false);
-        }
+
+        if (mQuestionBank[mCurrentIndex].isCompleted()) buttonsSetDisable();
+        if (mAmountAnsvered == mQuestionBank.length) showResult();
     }
 
     private void showToast(boolean isRight) {
@@ -161,6 +160,22 @@ public class QuizActivity extends AppCompatActivity {
                     R.string.incorrect_toast,
                     Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void buttonsSetEnable() {
+        mTrueButton.setEnabled(true);
+        mFalseButton.setEnabled(true);
+    }
+
+    private void buttonsSetDisable() {
+        mTrueButton.setEnabled(false);
+        mFalseButton.setEnabled(false);
+    }
+
+    private void showResult(){
+        Toast toast = Toast.makeText(QuizActivity.this, "Все отвечено. Вы ответили правильно на " + mAmountCorrects + " вопросов из " + mQuestionBank.length, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.TOP, 1, 1);
+        toast.show();
     }
 }
 
