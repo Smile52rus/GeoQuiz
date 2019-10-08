@@ -48,11 +48,14 @@
         android:id="@+id/question_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="24dp" />
+
+    <TextView
+        android:id="@+id/api_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:padding="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="dadada"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cheat_button"

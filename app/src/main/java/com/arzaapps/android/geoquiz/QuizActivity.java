@@ -2,6 +2,7 @@ package com.arzaapps.android.geoquiz;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -26,6 +27,7 @@ public class QuizActivity extends AppCompatActivity {
     private Button mBackButton;
     private Button mCheatButton;
     private TextView mQuestionTextView;
+    private TextView mApiLevel;
 
     private Question[] mQuestionBank = new Question[]{
             new Question(R.string.question_australia, true, false),
@@ -73,6 +75,9 @@ public class QuizActivity extends AppCompatActivity {
 
         mQuestionTextView = findViewById(R.id.question_text_view);
         mQuestionTextView.setOnClickListener(nextAnswerListener);
+
+        mApiLevel = findViewById(R.id.api_level);
+        mApiLevel.setText(String.valueOf(Build.VERSION.SDK_INT));
 
         mTrueButton = findViewById(R.id.true_button);
         mTrueButton.setOnClickListener(new View.OnClickListener() {
