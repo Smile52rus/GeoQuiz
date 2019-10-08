@@ -24,7 +24,10 @@ public class CheatActivity extends AppCompatActivity {
     private boolean mCheating = false;
 
     private TextView mAnswerTextView;
+    private TextView mTipsLeftTextView;
     private Button mShowAnswerButton;
+
+
 
     public static Intent newIntent(Context pacContext, boolean answerIsTrue) {
         Intent intent = new Intent(pacContext, CheatActivity.class);
@@ -51,6 +54,11 @@ public class CheatActivity extends AppCompatActivity {
         mAnswerTextView = findViewById(R.id.answer_text_view);
         mShowAnswerButton = findViewById(R.id.show_answer_button);
 
+        if (QuizActivity.tipsLeft == 0) mShowAnswerButton.setEnabled(false);
+
+        mTipsLeftTextView = findViewById(R.id.tips_left_text_view);
+        mTipsLeftTextView.setText("Осталось " + QuizActivity.tipsLeft + " подсказок");
+
         mShowAnswerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,20 +68,11 @@ public class CheatActivity extends AppCompatActivity {
                 mCheating = true;
                 setAnswerShownResult(mCheating);
 
-                int cx = mShowAnswerButton.getWidth() / 2;
-                int cy = mShowAnswerButton.getHeight() / 2;
-                float radius = mShowAnswerButton.getWidth();
-                Animator anim = ViewAnimationUtils
-                        .createCircularReveal(mShowAnswerButton, cx, cy, radius, 0);
-                anim.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        super.onAnimationEnd(animation);
-                        mShowAnswerButton.setVisibility(View.INVISIBLE);
-                    }
-                });
-                anim.start();
+                animCloseButton(mShowAnswerButton);
 
+                QuizActivity.tipsLeft--;
+                if (QuizActivity.tipsLeft < 0) QuizActivity.tipsLeft++;
+                mTipsLeftTextView.setText("Осталось " + QuizActivity.tipsLeft + " подсказок");
             }
         });
     }
@@ -89,5 +88,21 @@ public class CheatActivity extends AppCompatActivity {
         Intent data = new Intent();
         data.putExtra(EXTRA_ANSWER_SHOWN, isAnswerShown);
         setResult(RESULT_OK, data);
+    }
+
+    public void animCloseButton(final Button button){
+        int cx = button.getWidth() / 2;
+        int cy = button.getHeight() / 2;
+        float radius = button.getWidth();
+        Animator anim = ViewAnimationUtils
+                .createCircularReveal(button, cx, cy, radius, 0);
+        anim.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                button.setVisibility(View.INVISIBLE);
+            }
+        });
+        anim.start();
     }
 }

@@ -60,6 +60,7 @@ public class QuizActivity extends AppCompatActivity {
     private boolean mIsCheater;
     private int mAmountAnsvered = 0;
     private int mAmountCorrects = 0;
+    public static int tipsLeft = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
