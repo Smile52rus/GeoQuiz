@@ -39,7 +39,8 @@ public class QuizActivity extends AppCompatActivity {
     View.OnClickListener nextAnswerListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+            mCurrentIndex++;
+            if (mCurrentIndex == mQuestionBank.length) mCurrentIndex--;
             mIsCheater = false;
             updateQuestion();
         }
