@@ -2,6 +2,7 @@ package com.arzaapps.android.geoquiz;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -39,6 +40,7 @@ public class CheatActivity extends AppCompatActivity {
         return result.getBooleanExtra(EXTRA_ANSWER_SHOWN, false);
     }
 
+    @SuppressLint("DefaultLocale")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +59,7 @@ public class CheatActivity extends AppCompatActivity {
         if (QuizActivity.tipsLeft == 0) mShowAnswerButton.setEnabled(false);
 
         mTipsLeftTextView = findViewById(R.id.tips_left_text_view);
-        mTipsLeftTextView.setText("Осталось " + QuizActivity.tipsLeft + " подсказок");
+        mTipsLeftTextView.setText(String.format(" %s %d подсказок", getString(R.string.tips_left_text), QuizActivity.tipsLeft));
 
         mShowAnswerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +74,7 @@ public class CheatActivity extends AppCompatActivity {
 
                 QuizActivity.tipsLeft--;
                 if (QuizActivity.tipsLeft < 0) QuizActivity.tipsLeft++;
-                mTipsLeftTextView.setText("Осталось " + QuizActivity.tipsLeft + " подсказок");
+                mTipsLeftTextView.setText(String.format(" %s %d подсказок", getString(R.string.tips_left_text), QuizActivity.tipsLeft));
             }
         });
     }
